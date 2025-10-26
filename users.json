@@ -1,0 +1,11 @@
+{
+    "deeznuts": {
+        "password": "bignuts",
+        "cards": [],
+        "purchases": [
+            "Sword",
+            "Helmet",
+            "Boots"
+        ]
+    }
+}
