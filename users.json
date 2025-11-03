@@ -1,11 +1,15 @@
 {
     "deeznuts": {
         "password": "bignuts",
-        "cards": [],
         "purchases": [
             "Sword",
             "Helmet",
             "Boots"
         ]
+    },
+    "deez": {
+        "password": "bignuts",
+        "purchases": []
     }
+
 }

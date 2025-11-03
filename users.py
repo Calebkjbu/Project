@@ -22,40 +22,39 @@ def update_user(username, data):
     users[username] = data
     save_users(users)
 
-# --- Build highlighted menu line ---
+
 def build_line(text, is_selected=False, width=MENU_WIDTH):
     if is_selected:
         return term.reverse + term.bold_yellow + text.center(width-2) + term.normal
     else:
         return text.center(width-2)
 
-# --- Login / Signup menu ---
+
 def login_signup_menu():
     options = ["Login", "Sign Up", "Exit"]
     selected = 0
 
     while True:
         choice = None
-        # --- Draw menu and handle arrows inside cbreak ---
+
         with term.cbreak(), term.hidden_cursor():
             print(term.clear)
             top = term.height // 2 - len(options) // 2 - 2
             left = (term.width - MENU_WIDTH) // 2
 
-            # Top border
+
             print(term.move_yx(top, left) + "+" + "-"*(MENU_WIDTH-2) + "+")
             print(term.move_yx(top+1, left) + "|" + "🔑 Welcome!".center(MENU_WIDTH-2) + "|")
             print(term.move_yx(top+2, left) + "+" + "-"*(MENU_WIDTH-2) + "+")
 
-            # Menu options
+
             for i, option in enumerate(options):
                 line = build_line(option, selected == i)
                 print(term.move_yx(top+3+i, left) + "|" + line + "|")
 
-            # Bottom border
             print(term.move_yx(top+3+len(options), left) + "+" + "-"*(MENU_WIDTH-2) + "+")
 
-            # Get key
+
             key = term.inkey()
             if key.name == "KEY_DOWN":
                 selected = (selected + 1) % len(options)
@@ -64,21 +63,21 @@ def login_signup_menu():
             elif key.name == "KEY_ENTER":
                 choice = options[selected]
 
-        # --- Handle choices outside cbreak ---
+
         if choice == "Login":
             username = login_input()
             if username:
-                return username  # Exit menu only after successful login
+                return username
         elif choice == "Sign Up":
-            signup_input()       # Return to menu after signup
+            signup_input()
         elif choice == "Exit":
             return None
 
-# --- Login input ---
+
 def login_input():
     users = load_users()
     print(term.clear)
-    print(term.center("=== Login ==="))
+    print(term.center(" Login "))
     print(term.center("Type your username and password below\n"))
 
     username = input("Username: ")
@@ -94,7 +93,7 @@ def login_input():
         input()
         return None
 
-    print(f"\n✅ Welcome back, {username}! Press Enter to continue...")
+    print(f"\n✅ Welcome back, {username}! Press Enter to continue")
     input()
     return username
 

@@ -2,7 +2,13 @@ from blessed import Terminal
 from users import load_users, update_user
 
 term = Terminal()
-PRODUCTS = ["Sword", "Shield", "Potion", "Helmet", "Boots"]
+PRODUCTS = [
+    {"name": "Big vacuum", "price": 120},
+    {"name": "Monitor 4k", "price": 350},
+    {"name": "Silent Keyboard", "price": 50},
+    {"name": "Wireless mouse", "price": 30},
+    {"name": "DDR 5 Ram 8 GB", "price": 80},
+]
 MENU_WIDTH = 40
 
 def shop_page(username):
@@ -27,14 +33,15 @@ def shop_page(username):
 
         # Top border
         print(term.move_yx(top - 3, left) + "+" + "-"*(MENU_WIDTH-2) + "+")
-        print(term.move_yx(top - 2, left) + "|" + "🛒 Shop".center(MENU_WIDTH-2) + "|")
+        print(term.move_yx(top - 2, left) + "|" + "Shop".center(MENU_WIDTH-2) + "|")
         print(term.move_yx(top - 1, left) + "+" + "-"*(MENU_WIDTH-2) + "+")
 
-        # Products
-        for i, item in enumerate(PRODUCTS):
-            print(term.move_yx(top + i, left) + build_bordered_line(item, selected == i))
 
-        # Bottom instructions
+        for i, product in enumerate(PRODUCTS):
+            line_text = f"{product['name']} - ${product['price']}"
+            print(term.move_yx(top + i, left) + build_bordered_line(line_text, selected == i))
+
+
         print(term.move_yx(top + len(PRODUCTS), left) + "+" + "-"*(MENU_WIDTH-2) + "+")
         print(term.move_yx(top + len(PRODUCTS)+1, left) + "|" + "Press Enter to buy, q to exit".center(MENU_WIDTH-2) + "|")
         print(term.move_yx(top + len(PRODUCTS)+2, left) + "+" + "-"*(MENU_WIDTH-2) + "+")

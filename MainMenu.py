@@ -1,9 +1,10 @@
 from blessed import Terminal
 from users import login_signup_menu
 from shop import shop_page
+from settings import View_History
 
 term = Terminal()
-menu_options = ["Shop", "Settings", "Add Cards", "Exit"]
+menu_options = ["Shop", "Cards", "Exit", "View History"]
 selected = 0
 MENU_WIDTH = 40
 
@@ -57,14 +58,13 @@ def main_menu(username):
                 choice = menu_options[selected]
                 if choice == "Shop":
                     shop_page(username)
-                elif choice == "Settings":
-                    print(term.clear + "⚙️ Settings coming soon! Press any key...")
-                    term.inkey()
+                elif choice == "View History":
+                    View_History(username)
                 elif choice == "Add Cards":
-                    print(term.clear + "💳 Add Cards coming soon! Press any key...")
+                    print(term.clear + " Add Cards coming soon! Press any key...")
                     term.inkey()
                 elif choice == "Exit":
-                    print(term.clear + "👋 Goodbye! Press any key to exit...")
+                    print(term.clear + " See ya Press any key to exit...")
                     term.inkey()
                     return
 
